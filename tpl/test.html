@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{$articletitle}</title>
+	</head>
+	<body>
+		{$articletitle}
+		<br />
+		<!--第一种输出方式：-->
+		{$baby.name}
+		
+		<!--第二种输出方式-->
+		{$baby['age']}
+
+		
+		<br />
+		
+		<!--第一种输出方式：-->
+		{$baby2['babyInfo']['name']}
+		
+		<!--第二种输出方式-->
+		{$baby2.babyInfo.age}
+		
+		<br />
+		调节器————首字母变大写<br />
+		
+		{$tiaojieqi|capitalize}
+		
+		<br />
+		调节器————连接字符串cat,
+		cat后面的字符串加双引号,继续加字符串的话，就继续加冒号<br />
+		{$tiaojieqi|cat:"一生一世":"forever"}
+		
+	</body>
+</html>
