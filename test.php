@@ -23,14 +23,7 @@
 	$smarty->caching=false;//开始缓存
 	$smarty->cache_lifetime=120;//缓存时间
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
@@ -51,8 +44,37 @@
 
 	$smarty->assign('tiaojieqi','i am wuhua\'s father');
 
+	$smarty->assign('taobaoUrl','https://www.taobao.com/');
+	
+	$smarty->assign('daxiaoxie','Wu Hua baoBao');
+	
+	$smarty->assign('huanhangfu','I love you
+	I love you
+	I love you');
 	
 	
+//smarty的判断句式
+//	注意此处的91是数字类型 ，分数
+	$smarty->assign('score',91);
+	
+//smarty的索引二维数组的循环案例	
+
+	$stu=array(
+				array('name'=>'chenbo','sex'=>'man'),
+				array('name'=>'gongrui','sex'=>'woman')
+			  );
+
+	$smarty->assign('stu',$stu);
+	
+	
+//smarty二维关联数组的循环案例	
+	$nbaStar=array(
+				'team'=>array('teamName'=>'lakers','position'=>'Los Angeles'),
+				'player'=>array('playerName'=>'kobe','number'=>'24')
+			  );
+	$smarty->assign('nbaStar',$nbaStar);				  
+	
+
 	$smarty->display('test.html');
 
 ?>

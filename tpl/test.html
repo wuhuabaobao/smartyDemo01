@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>{$articletitle}</title>
+		
 	</head>
 	<body>
 		{$articletitle}
@@ -30,7 +31,70 @@
 		<br />
 		调节器————连接字符串cat,
 		cat后面的字符串加双引号,继续加字符串的话，就继续加冒号<br />
-		{$tiaojieqi|cat:"一生一世":"forever"}
+		{$tiaojieqi|cat:"一生一世":"forever"}<br />
+		
+		调节器————escape转码，escape后面跟的是转码方式，此处是url转码方式,目的是不让url里的一些符号对php后续的一些处理产生影响<br />
+		{$taobaoUrl|escape:"url"}<br />
+		
+		调节器————lower全部转成小写  <br />
+		{$daxiaoxie|lower}<br />
+		调节器————upper全部转成大写  <br />
+		{$daxiaoxie|upper} <br />
+		
+		调节器————nl2br转换成br换行符<br />
+		{$huanhangfu|nl2br}<br />
+		
+		smarty判断句式：<br />
+		{if $score gt 90}
+		你的成绩是：<br />
+		优秀
+		{elseif $score gt 60}
+		及格
+		{else}
+		不及格
+		{/if}
+		
+		<br />
+		
+		测试数组的单一键值输出:
+		{$stu.0.name}
+		<br />
+		测试循环foreach方式 <br />
+		
+		
+		<!--此处的$num=>$stuInfo 可以不要$num，直接携程$stuInfo，如果没有$num就是在下面取不到数组的索引值了而已-->
+		<!--$stu是被循环的数组 $stuInfo是每次循环输出的值-->
+		<!--因为此处的$stu是索引类型的二维数组，所以每次循环出来的$stuInfo就是一个一维数组，所以循环语句内部的取值就变成了{$stuInfo.name}这样了-->
+		<!--此处的二维数组$stu是一个索引形式的数组，所以没有$key=>$value一说，如果是关联数组  此处的$num就相当于是键名了-->
+		{foreach $stu as $num=>$stuInfo}
+			第{$num+1}位同学的资料是：{$stuInfo.name}
+			{$stuInfo.sex}
+			<br />
+		{/foreach}
+		
+		<br />
+		
+		<!--上面提到的关联类型的二维数组的输出案例-->
+		{foreach $nbaStar as $key=>$value}
+			{$key}信息：<br />
+			{if $key eq 'team'}
+			位置：{$value.position}<br />
+			名称：{$value.teamName} <br />
+			{else}
+			名字：{$value.playerName}<br />
+			号码：{$value.number} <br />
+			{/if}
+		{foreachelse}
+		<!--当数组为空时的默认输出信息-->
+			没有相关信息
+		{/foreach}
+		
+		<!--smarty的文件引入 默认只有file一个属性  其他的属性都是给被引入的文件传值，注意是被引入的文件-->
+		<!--传过去的sitename这个值将 只能被  yinru.html这个文件所使用，注意是只能被，连test.html都不能使用，最后都通过test.php输出出来-->
+		<!--如果yinru.html文件中有sitename的同名变量，将被传过去的sitename替代-->
+		{include file="yinru.html" sitename="陈波的测试站"}
 		
 	</body>
 </html>
+
+
