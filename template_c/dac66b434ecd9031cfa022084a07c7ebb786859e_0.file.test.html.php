@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-10-25 17:31:04
+/* Smarty version 3.1.30, created on 2017-10-26 17:42:38
   from "E:\wamp\pro\wamp\www\smartyDemo01\tpl\test.html" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59f0ae38dd99a3_36836404',
+  'unifunc' => 'content_59f2026e637dc4_13900097',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dac66b434ecd9031cfa022084a07c7ebb786859e' => 
     array (
       0 => 'E:\\wamp\\pro\\wamp\\www\\smartyDemo01\\tpl\\test.html',
-      1 => 1508945242,
+      1 => 1509032511,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:yinru.html' => 1,
   ),
 ),false)) {
-function content_59f0ae38dd99a3_36836404 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59f2026e637dc4_13900097 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_capitalize')) require_once 'E:\\wamp\\pro\\wamp\\www\\smartyDemo01\\smarty\\plugins\\modifier.capitalize.php';
 ?>
 <!DOCTYPE html>
@@ -101,6 +101,26 @@ if (!is_callable('smarty_modifier_capitalize')) require_once 'E:\\wamp\\pro\\wam
 		测试循环foreach方式 <br />
 		
 		
+		<!--$num=>可以没有，即 直接写  foreach $fruit as $fruitName 也是可以的-->
+		<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['fruit']->value, 'fruitName', false, 'num');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['num']->value => $_smarty_tpl->tpl_vars['fruitName']->value) {
+?>
+			第<?php echo $_smarty_tpl->tpl_vars['num']->value+1;?>
+个水果是:<?php echo $_smarty_tpl->tpl_vars['fruitName']->value;?>
+
+		<br />
+		<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+		
+		
+		<br />
+		
 		<!--此处的$num=>$stuInfo 可以不要$num，直接携程$stuInfo，如果没有$num就是在下面取不到数组的索引值了而已-->
 		<!--$stu是被循环的数组 $stuInfo是每次循环输出的值-->
 		<!--因为此处的$stu是索引类型的二维数组，所以每次循环出来的$stuInfo就是一个一维数组，所以循环语句内部的取值就变成了<?php echo $_smarty_tpl->tpl_vars['stuInfo']->value['name'];?>
@@ -159,9 +179,45 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
 		
 		<!--smarty的文件引入 默认只有file一个属性  其他的属性都是给被引入的文件传值，注意是被引入的文件-->
+		<!--传过去的sitename这个值将 只能被  yinru.html这个文件所使用，注意是只能被，连test.html都不能使用，最后都通过test.php输出出来-->
+		<!--如果yinru.html文件中有sitename的同名变量，将被传过去的sitename替代-->
 		<?php $_smarty_tpl->_subTemplateRender("file:yinru.html", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('sitename'=>"陈波的测试站"), 0, false);
 ?>
 
+		
+		
+		<!--注意此处传递的参数是一个数组类型的变量-->
+		<?php echo $_smarty_tpl->tpl_vars['myObj']->value->meth1(array('苹果','熟了'));?>
+
+		
+		<br />
+		
+		
+		
+		<!--php内置函数代替 smarty调机器-->
+		<?php echo $_smarty_tpl->tpl_vars['time']->value;?>
+
+		<br />
+		<!--此处用php内置的date函数来修改变量的格式，没有用smarty内置的，因为smarty在这方便麻烦，不方便-->
+		<!--在使用php内置函数的时候，与调节器不同，注意注意注意，内置函数的情况是，函数的第一个参数是放在竖线前面的，第二个参数
+		第三个参数是依次前面加上冒号后 放到 内置函数名的后面，如下-->
+		<?php echo date("Y-m-d",$_smarty_tpl->tpl_vars['time']->value);?>
+
+		<!--而不是按调机器的思维：<?php echo date($_smarty_tpl->tpl_vars['time']->value,"Y-m-d");?>
+  注意 不是这样，应该是上面那样-->
+		<br />
+		
+		<!--str_replace把 abcdef中的d换成了h-->
+		<?php echo str_replace('d','h',$_smarty_tpl->tpl_vars['str']->value);?>
+
+		
+		<br />
+		
+		<!--smarty自定义函数	-->
+		
+		<?php echo test(array('p1'=>'华为手机','p2'=>'360手机'),$_smarty_tpl);?>
+
+		
 		
 	</body>
 </html>

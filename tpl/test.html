@@ -62,6 +62,15 @@
 		测试循环foreach方式 <br />
 		
 		
+		<!--$num=>可以没有，即 直接写  foreach $fruit as $fruitName 也是可以的-->
+		{foreach $fruit as $num=>$fruitName}
+			第{$num+1}个水果是:{$fruitName}
+		<br />
+		{/foreach}
+		
+		
+		<br />
+		
 		<!--此处的$num=>$stuInfo 可以不要$num，直接携程$stuInfo，如果没有$num就是在下面取不到数组的索引值了而已-->
 		<!--$stu是被循环的数组 $stuInfo是每次循环输出的值-->
 		<!--因为此处的$stu是索引类型的二维数组，所以每次循环出来的$stuInfo就是一个一维数组，所以循环语句内部的取值就变成了{$stuInfo.name}这样了-->
@@ -93,6 +102,34 @@
 		<!--传过去的sitename这个值将 只能被  yinru.html这个文件所使用，注意是只能被，连test.html都不能使用，最后都通过test.php输出出来-->
 		<!--如果yinru.html文件中有sitename的同名变量，将被传过去的sitename替代-->
 		{include file="yinru.html" sitename="陈波的测试站"}
+		
+		
+		<!--注意此处传递的参数是一个数组类型的变量-->
+		{$myObj->meth1(array('苹果','熟了'))}
+		
+		<br />
+		
+		
+		
+		<!--php内置函数代替 smarty调机器-->
+		{$time}
+		<br />
+		<!--此处用php内置的date函数来修改变量的格式，没有用smarty内置的，因为smarty在这方便麻烦，不方便-->
+		<!--在使用php内置函数的时候，与调节器不同，注意注意注意，内置函数的情况是，函数的第一个参数是放在竖线前面的，第二个参数
+		第三个参数是依次前面加上冒号后 放到 内置函数名的后面，如下-->
+		{"Y-m-d"|date:$time}
+		<!--而不是按调机器的思维：{$time|date:"Y-m-d"}  注意 不是这样，应该是上面那样-->
+		<br />
+		
+		<!--str_replace把 abcdef中的d换成了h-->
+		{'d'|str_replace:'h':$str}
+		
+		<br />
+		
+		<!--smarty自定义函数	-->
+		
+		{f_test p1='华为手机' p2='360手机'}
+		
 		
 	</body>
 </html>

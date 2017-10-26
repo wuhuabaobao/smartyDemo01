@@ -19,9 +19,9 @@
 	$smarty->cache_dir="cache";//缓存目录
 	
 //	要让上面的	$smarty->cache_dir="cache"; 生效 ，必须先设置好smarty下面的两个属性
-//测试阶段关闭 缓存
-	$smarty->caching=false;//开始缓存
-	$smarty->cache_lifetime=120;//缓存时间
+//  以下就是开启缓存的另外两个配置，因为通常不用smarty的缓存机制，所以这里就将其注释掉了
+//	$smarty->caching=false;//开始缓存
+//	$smarty->cache_lifetime=120;//缓存时间
 	
 
 	
@@ -57,6 +57,15 @@
 //	注意此处的91是数字类型 ，分数
 	$smarty->assign('score',91);
 	
+	
+//smarty的一维数组的循环案例	
+
+	$fruit=array('苹果','香蕉','葡萄','梨子');
+
+	$smarty->assign('fruit',$fruit);
+	
+	
+	
 //smarty的索引二维数组的循环案例	
 
 	$stu=array(
@@ -73,6 +82,54 @@
 				'player'=>array('playerName'=>'kobe','number'=>'24')
 			  );
 	$smarty->assign('nbaStar',$nbaStar);				  
+	
+
+//smarty对象的案例
+	class My_object{
+		
+		function meth1($params){
+			
+			return $params[0].'已经'.$params[1];
+			
+		}
+		
+	}
+
+	$myObj = new My_object();
+	
+	$smarty->assign('myObj',$myObj);
+	
+	
+	
+//php内置函数代替 smarty调机器
+	$smarty->assign('time',time());
+	
+	$str='abcdef';
+	
+	$smarty->assign('str',$str);
+	
+	
+	
+	
+//smarty自定义函数	
+
+	function test($params){
+		
+		$p1=$params['p1'];
+		$p2=$params['p2'];
+		
+		return '第一个参数的值为：'.$p1.' 第二个参数的值为：'.$p2;		
+		
+	}
+	
+	
+	$smarty->registerPlugin('function','f_test','test');
+	
+	
+	
+	
+	
+	
 	
 
 	$smarty->display('test.html');
